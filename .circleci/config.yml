@@ -1,0 +1,32 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: circleci/golang:1.12
+    steps:
+      - run:
+          name: Clone Docker CLI repository
+          command: git clone -b netbsd/18.09 --depth 1 https://github.com/iquiw/cli.git
+          working_directory: /go/src/github.com/docker
+
+      - run:
+          name: Build Docker CLI
+          command: |
+            export VERSION=18.09.3
+            export GITCOMMIT=$(git rev-parse --short HEAD)
+            export BUILDTIME=$(date --utc --rfc-3339 ns 2> /dev/null | sed -e 's/ /T/')
+            go build -v
+          working_directory: /go/src/github.com/docker/cli/cmd/docker
+          environment:
+            GOOS: netbsd
+            GOARCH: amd64
+
+      - store_artifacts:
+          path: /go/src/github.com/docker/cli/cmd/docker/docker
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build
