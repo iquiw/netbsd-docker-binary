@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 
 jobs:
   build:
@@ -15,13 +15,34 @@ jobs:
           name: Build Docker CLI
           command: sh build.sh
 
-      - store_artifacts:
-          path: /go/src/github.com/docker/cli/cmd/docker/docker-netbsd-amd64.xz
-      - store_artifacts:
-          path: /go/src/github.com/docker/cli/cmd/docker/docker-netbsd-386.xz
+      - persist_to_workspace:
+          root: /tmp/artifacts
+          paths:
+            - docker-*
+
+  deploy:
+    machine: true
+    steps:
+      - checkout
+      - run:
+          name: Deploy artifacts by hub
+          command: sh deploy.sh
+      - attach_workspace:
+          at: /tmp/artifacts
 
 workflows:
   version: 2
   build:
     jobs:
-      - build
+      - build:
+          filters:
+            tags:
+              only: /v.*/
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /v.*/
