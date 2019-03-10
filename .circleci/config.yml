@@ -16,9 +16,9 @@ jobs:
           command: sh build.sh
 
       - store_artifacts:
-          path: /go/src/github.com/docker/cli/cmd/docker/docker-amd64
+          path: /go/src/github.com/docker/cli/cmd/docker/docker-netbsd-amd64.xz
       - store_artifacts:
-          path: /go/src/github.com/docker/cli/cmd/docker/docker-386
+          path: /go/src/github.com/docker/cli/cmd/docker/docker-netbsd-386.xz
 
 workflows:
   version: 2
