@@ -16,7 +16,7 @@ jobs:
           command: sh build.sh
 
       - run:
-          name: Deploy artifacts by hub
+          name: Deploy artifacts to GitHub
           command: sh deploy.sh
 
 workflows:

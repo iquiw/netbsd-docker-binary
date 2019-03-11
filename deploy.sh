@@ -2,15 +2,16 @@
 
 set -ex
 
-HUB_VERSION=2.10.0
+GHR_VERSION=0.12.0
 
-curl -sLO https://github.com/github/hub/releases/download/v$HUB_VERSION/hub-linux-amd64-$HUB_VERSION.tgz
+curl -sLO https://github.com/tcnksm/ghr/releases/download/v$GHR_VERSION/ghr_v${GHR_VERSION}_linux_amd64.tar.gz
 
-tar xvzf hub-linux-amd64-$HUB_VERSION.tgz hub-linux-amd64-$HUB_VERSION/bin/hub
+tar xvzf ghr_v${GHR_VERSION}_linux_amd64.tar.gz ghr_v${GHR_VERSION}_linux_amd64/ghr
 
-./hub-linux-amd64-$HUB_VERSION/bin/hub \
-	release create \
-	-a "/tmp/artifacts/docker-netbsd-amd64.xz" \
-	-a "/tmp/artifacts/docker-netbsd-386.xz" \
-	-m 'Docker CLI binaries for NetBSD.' \
-	"$CIRCLE_TAG"
+./ghr_v${GHR_VERSION}_linux_amd64/ghr \
+       -c "$CIRCLE_SHA1" \
+       -u "$CIRCLE_PROJECT_USERNAME" \
+       -r "$CIRCLE_PROJECT_REPONAME" \
+       -b 'Docker CLI binaries for NetBSD.' \
+       -delete \
+       "$CIRCLE_TAG" /tmp/artifacts
