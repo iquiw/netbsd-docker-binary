@@ -2,7 +2,7 @@
 
 set -ex
 
-GHR_VERSION=0.12.0
+GHR_VERSION=0.12.1
 
 curl -sLO https://github.com/tcnksm/ghr/releases/download/v$GHR_VERSION/ghr_v${GHR_VERSION}_linux_amd64.tar.gz
 
