@@ -2,7 +2,7 @@
 
 set -ex
 
-VERSION=18.09.8
+VERSION=19.03.1
 GITCOMMIT=$(git rev-parse --short HEAD)
 BUILDTIME=$(date --utc --rfc-3339 ns 2> /dev/null | sed -e 's/ /T/')
 

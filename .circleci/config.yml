@@ -8,7 +8,7 @@ jobs:
       - checkout
       - run:
           name: Clone Docker CLI repository
-          command: git clone -b netbsd/v18.09.8 --depth 1 https://github.com/iquiw/cli.git
+          command: git clone -b netbsd/v19.03.1 --depth 1 https://github.com/iquiw/cli.git
           working_directory: /go/src/github.com/docker
 
       - run:
