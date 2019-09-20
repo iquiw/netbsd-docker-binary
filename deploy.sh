@@ -12,5 +12,6 @@ tar xvzf ghr_v${GHR_VERSION}_linux_amd64.tar.gz ghr_v${GHR_VERSION}_linux_amd64/
        -c "$CIRCLE_SHA1" \
        -u "$CIRCLE_PROJECT_USERNAME" \
        -r "$CIRCLE_PROJECT_REPONAME" \
+       -n "$CIRCLE_TAG" \
        -b 'Docker CLI binaries for NetBSD.' \
        "$CIRCLE_TAG" /tmp/artifacts
