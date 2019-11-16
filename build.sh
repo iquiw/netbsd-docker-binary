@@ -6,9 +6,9 @@ VERSION=$(sed -n 's,.* netbsd/v\([0-9.]*\) .*,\1,p' .circleci/config.yml)
 GITCOMMIT=$(git rev-parse --short HEAD)
 BUILDTIME=$(date --utc --rfc-3339 ns 2> /dev/null | sed -e 's/ /T/')
 
-LDFLAGS="-X github.com/docker/cli/cli.Version=$VERSION \
--X github.com/docker/cli/cli.GitCommit=$GITCOMMIT \
--X github.com/docker/cli/cli.BuildTime=$BUILDTIME"
+LDFLAGS="-X github.com/docker/cli/cli/version.Version=$VERSION \
+-X github.com/docker/cli/cli/version.GitCommit=$GITCOMMIT \
+-X github.com/docker/cli/cli/version.BuildTime=$BUILDTIME"
 
 export GOOS=netbsd
 
