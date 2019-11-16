@@ -2,7 +2,7 @@
 
 set -ex
 
-VERSION=19.03.3
+VERSION=$(sed -n 's,.* netbsd/v\([0-9.]*\) .*,\1,p' .circleci/config.yml)
 GITCOMMIT=$(git rev-parse --short HEAD)
 BUILDTIME=$(date --utc --rfc-3339 ns 2> /dev/null | sed -e 's/ /T/')
 
